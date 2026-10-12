@@ -1,0 +1,226 @@
+/* BrushPush site: the game's dusk page (src/ui/palette.gd). */
+:root {
+  --page: #16101e;
+  --page-top: #2e2042;
+  --panel: #3a2c50;
+  --panel-hi: #46365f;
+  --cell: #261d34;
+  --text: #e8ecf4;
+  --muted: #9a90ae;
+  --rose: #b9567f;
+  --rose-rim: #8e3b5e;
+  --star: #ffc531;
+  --frame-line: #c3b1d9;
+  --radius: 22px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--page); }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--page-top) 0%, var(--page) 70%) fixed;
+  color: var(--text);
+  font: 17px/1.6 "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* The faint, askew board of tiles behind every page, as in the game's menus. */
+.backdrop {
+  position: fixed;
+  inset: -40%;
+  z-index: 0;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 14), 96px);
+  grid-auto-rows: 96px;
+  gap: 12px;
+  justify-content: center;
+  align-content: center;
+  transform: rotate(-14deg);
+  opacity: 0.12;
+}
+
+.backdrop i {
+  border-radius: 20px;
+  background: var(--face);
+  box-shadow: inset 0 -9px 0 var(--rim);
+  padding: 22px 22px 31px;
+}
+
+.backdrop svg { display: block; width: 100%; height: 100%; transform: rotate(var(--turn)); }
+
+.backdrop i.empty { background: transparent; box-shadow: none; }
+
+main, footer {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.hero {
+  text-align: center;
+  padding: 40px 0 8px;
+}
+
+.hero a { display: inline-block; }
+
+.hero img {
+  width: min(300px, 72vw);
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.hero p {
+  color: var(--muted);
+  margin: 4px auto 0;
+  max-width: 30em;
+}
+
+h1, h2, h3 { line-height: 1.25; font-weight: 800; }
+
+h1 { font-size: 30px; margin: 32px 0 4px; text-align: center; }
+
+h2 { font-size: 21px; margin: 0 0 10px; }
+
+h3 { font-size: 17px; margin: 22px 0 6px; color: var(--frame-line); }
+
+.lead { text-align: center; color: var(--muted); margin: 0 0 24px; }
+
+.card {
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 16px 0;
+  box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.18);
+}
+
+.card > :last-child { margin-bottom: 0; }
+
+.card p { margin: 0 0 12px; }
+
+a { color: var(--star); text-underline-offset: 3px; }
+
+/* The main button: the strongest tile, rose with its rim and three chevrons. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--rose);
+  color: #fff;
+  font-weight: 800;
+  font-size: 19px;
+  text-decoration: none;
+  padding: 14px 24px 18px;
+  border-radius: 18px;
+  box-shadow: inset 0 -6px 0 var(--rose-rim);
+  transition: transform 80ms ease, box-shadow 80ms ease;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.button::after {
+  content: "";
+  flex: none;
+  width: 34px;
+  height: 22px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 22'%3E%3Cpath d='M3 3l8 8-8 8M13 3l8 8-8 8M23 3l8 8-8 8' fill='none' stroke='white' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.button:active { transform: translateY(4px); box-shadow: inset 0 -2px 0 var(--rose-rim); }
+
+.button:focus-visible, summary:focus-visible, a:focus-visible { outline: 3px solid var(--star); outline-offset: 3px; }
+
+.contact { text-align: center; }
+
+.contact .button { margin: 6px 0 14px; }
+
+.small { font-size: 15px; color: var(--muted); }
+
+/* The main menu's round "i" button, named in the text. */
+.key {
+  display: inline-grid;
+  place-items: center;
+  width: 1.45em;
+  height: 1.45em;
+  border-radius: 50%;
+  background: var(--panel-hi);
+  color: var(--text);
+  font: 800 0.8em/1 Georgia, serif;
+  font-style: italic;
+  vertical-align: 0.1em;
+}
+
+/* FAQ: each question a dark cell that opens. */
+details {
+  background: var(--cell);
+  border-radius: 16px;
+  margin: 10px 0;
+  padding: 0 18px;
+}
+
+summary {
+  cursor: pointer;
+  list-style: none;
+  font-weight: 700;
+  padding: 14px 28px 14px 0;
+  position: relative;
+}
+
+summary::-webkit-details-marker { display: none; }
+
+summary::after {
+  content: "›";
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 26px;
+  color: var(--rose);
+  transition: transform 150ms ease;
+}
+
+details[open] summary::after { transform: translateY(-50%) rotate(90deg); }
+
+details > p, details > ul { margin: 0 0 14px; color: var(--text); }
+
+ul { padding-left: 22px; margin: 0 0 12px; }
+
+li { margin: 4px 0; }
+
+.policy .card p, .policy .card li { color: var(--text); }
+
+.policy .updated { text-align: center; color: var(--muted); margin: 0 0 20px; }
+
+.tldr { border: 2px solid var(--rose); }
+
+.tldr li::marker { color: var(--star); }
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+  padding-top: 24px;
+  padding-bottom: 40px;
+}
+
+footer nav { display: flex; justify-content: center; gap: 24px; margin-bottom: 8px; flex-wrap: wrap; }
+
+footer a { color: var(--text); }
+
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .card { padding: 20px 18px; }
+  h1 { font-size: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button, summary::after { transition: none; }
+}
