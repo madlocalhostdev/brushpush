@@ -195,9 +195,9 @@ ul { padding-left: 22px; margin: 0 0 12px; }
 
 li { margin: 4px 0; }
 
-.policy .card p, .policy .card li { color: var(--text); }
+.privacy .card p, .privacy .card li { color: var(--text); }
 
-.policy .updated { text-align: center; color: var(--muted); margin: 0 0 20px; }
+.privacy .updated { text-align: center; color: var(--muted); margin: 0 0 20px; }
 
 .tldr { border: 2px solid var(--rose); }
 
@@ -214,6 +214,16 @@ footer {
 footer nav { display: flex; justify-content: center; gap: 24px; margin-bottom: 8px; flex-wrap: wrap; }
 
 footer a { color: var(--text); }
+
+footer .langs { gap: 6px 18px; margin: 4px 0 14px; }
+
+footer .langs a { color: var(--muted); text-decoration: none; }
+
+footer .langs a[aria-current] { color: var(--star); font-weight: 700; }
+
+:lang(hi) body, body:lang(hi) { font-family: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif; }
+
+:lang(zh-CN) body, body:lang(zh-CN) { font-family: "Noto Sans", "Noto Sans SC", system-ui, sans-serif; }
 
 @media (max-width: 480px) {
   body { font-size: 16px; }
